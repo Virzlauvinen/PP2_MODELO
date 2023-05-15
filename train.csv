@@ -1,4 +1,4 @@
-id,empleado,sexo,edad,años_edc,pareja,estudiante_act,estrato,pc,internet,etnia,padres_reside
+id,empleado,sexo,edad,anos_edc,pareja,estudiante_act,estrato,pc,internet,etnia,padres_reside
 12937,0,1,40.0,10.0,1,No,2,1,1,sin_rec_etnico,ninguno
 27786,0,0,52.0,8.0,0,No,2,1,1,sin_rec_etnico,ninguno
 6326,1,1,40.0,16.0,1,No,3,1,1,sin_rec_etnico,ninguno
