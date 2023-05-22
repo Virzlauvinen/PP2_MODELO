@@ -15,8 +15,8 @@ from sklearn.metrics import accuracy_score
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import GridSearchCV
-from modelo_entrenamiento import random_forest
-from modelo_entrenamiento import decision_tree
+from Src.modelo_entrenamiento import random_forest
+from Src.modelo_entrenamiento import decision_tree
 
 # print(random_forest)
 # !pip install; random_forest

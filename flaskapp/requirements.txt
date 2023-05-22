@@ -1,10 +1,17 @@
-Flask==2.0.2
+Flask==2.3.2
+flask_cors==3.0.10
+lightgbm==3.3.5
+matplotlib==3.7.1
+numpy
+pandas
+protobuf==4.23.0
+scikit_learn==1.2.2
+seaborn==0.12.2
+xgboost==1.7.5
 certifi==2021.10.8
 dnspython==2.2.0
 gunicorn==20.1.0
 Jinja2==3.0.3
-numpy
-pandas
 joblib==0.13.2
 kiwisolver==1.1.0
 lightgbm==2.2.1
@@ -17,5 +24,3 @@ setuptools==41.0.1
 six==1.12.0
 wheel==0.33.4
 wincertstore==0.2
-xgboost
-flask-cors
