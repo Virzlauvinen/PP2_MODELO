@@ -7,14 +7,14 @@ Original file is located at
     https://colab.research.google.com/drive/1okrKO_i5epQxH3i7sjh9VHOrFibCyS8c
 """
 
-#Vincula Colab con Drive (monta el Drive en la máquina virtual que nos provee Google)
+# Vincula Colab con Drive (monta el Drive en la máquina virtual que nos provee Google)
 # from google.colab import drive
 
 # drive.mount('/content/DRIVE')
 
 """#LIBRERIAS"""
 
-#Importo librerias
+# Importo librerias
 import pandas as pd
 import numpy as np
 
@@ -135,7 +135,7 @@ dataset_crudo.info()
 dataset_curado = dataset_crudo
 
 #Guarda el DF CURADO en un archivo csv
-dataset_curado.to_csv('dataset_curado_1', index=False)
+dataset_curado.to_csv('../static/dataset_curado_1', index=False)
 
 #get_dummies convierte la variable categórica en variables ficticias/indicadoras (por cada categoria agrega una columna).
 dataset_curado_2 = pd.get_dummies(dataset_curado, columns=['padres_reside'])
@@ -147,7 +147,7 @@ dataset_curado_2
 dataset_curado_2.info()
 
 #Guarda el DF CURADO en un archivo csv
-dataset_curado_2.to_csv('dataset_curado_2', index=False)
+dataset_curado_2.to_csv('../static/dataset_curado_2', index=False)
 
 """#**MODELO: ARBOL DE DESICIÓN (DT)**"""
 
