@@ -1,0 +1,1 @@
+src/modelo_prediccion.py:31:80: E501 line too long (116 > 79 characters)
