@@ -11,10 +11,18 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import GridSearchCV
 
+import os
+
+def ver_directorio_actual():
+    directorio_actual = os.getcwd()
+    print("Directorio actual:", directorio_actual)
+
 """# OBTENCIÓN DEL DATA SET"""
 
 # Lee el csv y lo convierte a un df de pandas
-path = 'train.csv'
+# path = "/data/train.csv"
+ver_directorio_actual()
+path = "flaskapp/data/train.csv"
 dataset_crudo = pd.read_csv(path)
 dataset_crudo
 
@@ -118,19 +126,21 @@ dataset_crudo.info()
 dataset_curado = dataset_crudo
 
 # Guarda el DF CURADO en un archivo csv
-dataset_curado.to_csv('../static/dataset_curado_1', index=False)
+# ver_directorio_actual()
+dataset_curado.to_csv('flaskapp/static/dataset_curado_1', index=False)
 
 # get_dummies convierte la variable categórica en variables ficticias/indicadoras (por cada categoria agrega una columna).
 dataset_curado_2 = pd.get_dummies(dataset_curado, columns=['padres_reside'])
-dataset_curado_2
+# dataset_curado_2
 
 dataset_curado_2 = pd.get_dummies(dataset_curado_2, columns=['etnia'])
-dataset_curado_2
+# dataset_curado_2
 
 dataset_curado_2.info()
 
 # Guarda el DF CURADO en un archivo csv
-dataset_curado_2.to_csv('../static/dataset_curado_2', index=False)
+# print('Estoy en el siguiente directorio: ', ver_directorio_actual())
+dataset_curado_2.to_csv('flaskapp/static/dataset_curado_2', index=False)
 
 """# **MODELO: ARBOL DE DESICIÓN (DT)**"""
 
