@@ -1,0 +1,18 @@
+src/modelo_entrenamiento.py:16:1: E302 expected 2 blank lines, found 1
+src/modelo_entrenamiento.py:20:1: E305 expected 2 blank lines after class or function definition, found 1
+src/modelo_entrenamiento.py:45:80: E501 line too long (128 > 79 characters)
+src/modelo_entrenamiento.py:49:80: E501 line too long (98 > 79 characters)
+src/modelo_entrenamiento.py:72:80: E501 line too long (108 > 79 characters)
+src/modelo_entrenamiento.py:111:80: E501 line too long (84 > 79 characters)
+src/modelo_entrenamiento.py:112:80: E501 line too long (92 > 79 characters)
+src/modelo_entrenamiento.py:132:80: E501 line too long (122 > 79 characters)
+src/modelo_entrenamiento.py:152:80: E501 line too long (116 > 79 characters)
+src/modelo_entrenamiento.py:169:80: E501 line too long (81 > 79 characters)
+src/modelo_entrenamiento.py:170:80: E501 line too long (93 > 79 characters)
+src/modelo_entrenamiento.py:171:80: E501 line too long (111 > 79 characters)
+src/modelo_entrenamiento.py:172:80: E501 line too long (109 > 79 characters)
+src/modelo_entrenamiento.py:191:80: E501 line too long (81 > 79 characters)
+src/modelo_entrenamiento.py:199:80: E501 line too long (84 > 79 characters)
+src/modelo_entrenamiento.py:206:80: E501 line too long (90 > 79 characters)
+src/modelo_entrenamiento.py:207:80: E501 line too long (176 > 79 characters)
+src/modelo_entrenamiento.py:208:80: E501 line too long (162 > 79 characters)
