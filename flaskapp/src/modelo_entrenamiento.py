@@ -9,13 +9,15 @@ from sklearn import tree
 # from sklearn.metrics import accuracy_score
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
-from sklearn.model_selection import GridSearchCV
+from modelo_best_param import busqueda_best_parametros_grilla
+from modelo_best_param import armar_parametros
+# from sklearn.model_selection import GridSearchCV
 import os
 
 
 def ver_directorio_actual():
     directorio_actual = os.getcwd()
-    print("Directorio actual:", directorio_actual)\
+    print("Directorio actual:", directorio_actual)
 
 
 
@@ -130,7 +132,7 @@ dataset_curado = dataset_crudo
 
 # Guarda el DF CURADO en un archivo csv
 # ver_directorio_actual()
-dataset_curado.to_csv('flaskapp/static/dataset_curado_1', index=False)
+dataset_curado.to_csv('flaskapp/static/dataset_curado_1.csv', index=False)
 
 # get_dummies convierte la variable categórica en variables ficticias/indicadoras (por cada categoria agrega una columna).
 dataset_curado_2 = pd.get_dummies(dataset_curado, columns=['padres_reside'])
@@ -143,7 +145,7 @@ dataset_curado_2.info()
 
 # Guarda el DF CURADO en un archivo csv
 # print('Estoy en el siguiente directorio: ', ver_directorio_actual())
-dataset_curado_2.to_csv('flaskapp/static/dataset_curado_2', index=False)
+dataset_curado_2.to_csv('flaskapp/static/dataset_curado_2.csv', index=False)
 
 """# **MODELO: ARBOL DE DESICIÓN (DT)**"""
 
@@ -159,53 +161,30 @@ min_max_scaler = preprocessing.MinMaxScaler()
 datos_train_normalizado = min_max_scaler.fit_transform(datos_train)
 datos_test_normalizado = min_max_scaler.fit_transform(datos_test)
 
-"""# # **Busqueda en Grilla de los mejores hiperparametros**
+# print(datos_test)
+datos_test.to_csv('flaskapp/data/datos_test_prediccion.csv', index=False)
 
-"""
+# Crea CSV con parametros
+# busqueda_best_parametros_grilla(datos_train_normalizado, target_train)
 
-# Generamos los parametros para hacer una busqueda en grilla del mejor modelo
+# leo csv con best parametros para  HACER TEST UNITARIO
+best_param_load = pd.read_csv('flaskapp/data/df_param.csv')
 
-model_params = {
-    'random_forest': {
-        'model': RandomForestClassifier(),
-        'params': {
-            'n_estimators': [10, 25, 50],        # numero de arboles en el bosque
-            'max_depth': [3, 5, 10, 50, 100, 150],             # profundidad maxima del arbol
-            'min_samples_split': [10, 50],  # numero minimo de muestras requeridas para dividir un nodo interno
-            'min_samples_leaf': [10, 50],   # numero minimo de muestras requeridas para estar en un nodo hoja
-            'criterion': ['gini', 'entropy']
-        }
-    },
-    'decision tree': {
-        'model': tree.DecisionTreeClassifier(),
-        'params': {
-            'max_depth': [3, 5, 10, 50, 100, 150],
-            'min_samples_split': [10, 50],
-            'min_samples_leaf': [10, 50],
-            'criterion': ['gini', 'entropy']
-        }
-    }
-}
+# obtengo los parametros y los guardo en las variables
+criterion, max_depth, min_samples_leaf, min_samples_split, n_estimators = armar_parametros(best_param_load['best_params'][0])
 
-# Hacemos la busqueda en grilla
-score = []
+# entreno el modelo con los mejores parametros de Random Forest 
+random_forest = RandomForestClassifier(criterion=criterion, max_depth=max_depth, min_samples_leaf=min_samples_leaf, min_samples_split=min_samples_split, n_estimators=n_estimators).fit(datos_train_normalizado, target_train)
 
-for model_name, mp in model_params.items():
-    clf = GridSearchCV(mp['model'], mp['params'], cv=3, return_train_score=False)
-    clf.fit(datos_train_normalizado, target_train)
-    score.append({
-        'model': model_name,
-        'best_score': clf.best_score_,
-        'best_params': clf.best_params_
-    })
+# obtengo los parametros y los guardo en las variables pero con los parametros de DECISIONTREE
+criterion, max_depth, min_samples_leaf, min_samples_split, n_estimators = armar_parametros(best_param_load['best_params'][1])
+# ENTRENO EL MODELO
+decision_tree = tree.DecisionTreeClassifier(criterion=criterion, max_depth=max_depth, min_samples_leaf=min_samples_leaf, min_samples_split=min_samples_split).fit(datos_train_normalizado, target_train)
 
-# Vemos cuales fueron los mejores resultados de cada modelo y seleccionamos el mejor
-df_score = pd.DataFrame(score, columns=['model', 'best_score', 'best_params'])
-# df_score
 
-print(df_score['best_params'][0])
-print(df_score['best_params'][1])
+# Entrena el modelo con los parametros definidos por el csv de best param
+
+print("############### PROCESO DE ENTRENAMIENTO FINALIZADO #########################")
 
 # Entrenamos (con los datos del TRAIN) los modelos con las metricas obtenidas de la grilla
-random_forest = RandomForestClassifier(criterion='entropy', max_depth=50, min_samples_leaf=10, min_samples_split=10, n_estimators=50).fit(datos_train_normalizado, target_train)
-decision_tree = tree.DecisionTreeClassifier(criterion='gini', max_depth=150, min_samples_leaf=10, min_samples_split=10).fit(datos_train_normalizado, target_train)
+# decision_tree = tree.DecisionTreeClassifier(criterion='gini', max_depth=150, min_samples_leaf=10, min_samples_split=10).fit(datos_train_normalizado, target_train)

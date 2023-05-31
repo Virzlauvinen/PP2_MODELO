@@ -18,9 +18,9 @@ CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 def hello_world():
     try:
         models = request.json
-        data = pd.read_csv(os.path.join(app.static_folder, "processed_train_data.csv"))
-        X = data.drop('SalePrice', axis=1)
-        y = data['SalePrice']
+        data = pd.read_csv(os.path.join(app.static_folder, "dataset_curado_2.csv"))
+        X = data.drop('empleado', axis=1)
+        y = data['empleado']
 
         X_train, X_val, y_train, y_val = train_test_split(X, y, train_size=0.8, random_state=13)
 
@@ -79,9 +79,9 @@ def hello_world():
 def hello_world1():
     try:
         models = request.json
-        data = pd.read_csv(os.path.join(app.static_folder, "processed_train_data.csv"))
-        X = data.drop('SalePrice', axis=1)
-        y = data['SalePrice']
+        data = pd.read_csv(os.path.join(app.static_folder, "dataset_curado_2.csv"))
+        X = data.drop('empleado', axis=1)
+        y = data['empleado']
 
         X_train, X_val, y_train, y_val = train_test_split(X, y, train_size=0.8, random_state=13)
 
