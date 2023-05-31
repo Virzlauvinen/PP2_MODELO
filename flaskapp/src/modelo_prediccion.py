@@ -5,6 +5,8 @@
 # Importo librerias
 import pandas as pd
 # import numpy as np
+# import matplotlib.pyplot as plt
+# import seaborn as sn
 # from sklearn import preprocessing
 # from sklearn import tree
 # from sklearn.metrics import confusion_matrix
@@ -12,8 +14,8 @@ import pandas as pd
 # from sklearn.ensemble import RandomForestClassifier
 # from sklearn.model_selection import train_test_split
 # from sklearn.model_selection import GridSearchCV
-from Src.modelo_entrenamiento import random_forest
-from Src.modelo_entrenamiento import decision_tree
+from modelo_entrenamiento import random_forest
+from modelo_entrenamiento import decision_tree
 
 """#OBTENCIÓN DEL DATA SET"""
 
