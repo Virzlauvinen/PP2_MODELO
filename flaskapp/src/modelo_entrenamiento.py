@@ -10,14 +10,17 @@ from sklearn import tree
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import GridSearchCV
-
 import os
+
 
 def ver_directorio_actual():
     directorio_actual = os.getcwd()
-    print("Directorio actual:", directorio_actual)
+    print("Directorio actual:", directorio_actual)\
+
+
 
 """# OBTENCIÓN DEL DATA SET"""
+
 
 # Lee el csv y lo convierte a un df de pandas
 # path = "/data/train.csv"
