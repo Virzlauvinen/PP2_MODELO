@@ -13,6 +13,8 @@ from lightgbm import LGBMRegressor
 from src.modelo_entrenamiento import random_forest
 from src.modelo_entrenamiento import decision_tree
 
+
+
 app = Flask(__name__, static_url_path='/modelo')
 CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
