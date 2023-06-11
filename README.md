@@ -12,23 +12,14 @@ Para esto se seleccionaron los mejores modelos de la etapa anterior, Decision Tr
 
 # INSTALACION 
 
- 1 - Instalar Python 3.7 (la 10 y 11 andan mal) --> YO USE ANACONDA XQ SINO NO ANDABA
+1 - Instalar Python 3.7 
  
- 2 - En requirements.txt borrar la version del pip
- 
- 3 - Correr el requirements.txt ----> pip install -r requirements.txt
- 
- 4 - Agregar los CORS en el archivo app.py con el host de donde va a recibir la solicitud. 
- 
- Esto se debe hacer para que el servidor de Flask acepte las peticiones del servidor de React.
+ABRIR UNA TERMINAL COMMAND PROMPT 
 
-from flask import Flask, jsonify
-from flask_cors import CORS
+2 - Correr el requirements.txt ----> pip install -r requirements.txt
+ 
 
-app = Flask(_name_)
-CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
-
-5 - Ejecutar el servidor flask con  -----> flask run 
+3 - parado sobre la carpeta flaskapp ejecutar el servidor flask con  -----> flask run 
 
 6 - Ejecutar el servidor de React ---> npm start
 
