@@ -13,7 +13,7 @@ from modelo_best_param import busqueda_best_parametros_grilla
 from modelo_best_param import armar_parametros
 # from sklearn.model_selection import GridSearchCV
 import os
-import pickle
+import pickle 
 import datetime
 
 
@@ -198,8 +198,8 @@ directorio = 'flaskapp/modelo/rf/'
 os.makedirs(directorio, exist_ok=True)  # Crea el directorio si no existe
 
 # Ruta y nombre de archivo
-#filename = directorio + 'modelo_entrenado_rf_' + fecha_str + '.sav'
-filename = directorio + 'modelo_entrenado_rf_.sav'
+# filename = directorio + 'modelo_entrenado_rf_' + fecha_str + '.sav'
+filename = directorio + 'modelo_entrenado_rf.sav'
 
 # Guardar modelo
 pickle.dump(random_forest, open(filename, 'wb'))
@@ -210,9 +210,15 @@ directorio = 'flaskapp/modelo/dt/'
 os.makedirs(directorio, exist_ok=True)  # Crea el directorio si no existe
 
 # Ruta y nombre de archivo
-#filename = directorio + 'modelo_entrenado_dt_' + fecha_str + '.sav'
-filename = directorio + 'modelo_entrenado_dt_.sav'
+# filename = directorio + 'modelo_entrenado_dt_' + fecha_str + '.sav'
+filename = directorio + 'modelo_entrenado_dt.sav'
 
 # Guardar modelo
 pickle.dump(decision_tree, open(filename, 'wb'))
-print("Se guardo el archivo: ", 'decision_tree',filename)
+print("Se guardo el archivo: ", 'decision_tree',filename )
+
+
+
+
+# Entrenamos (con los datos del TRAIN) los modelos con las metricas obtenidas de la grilla
+# decision_tree = tree.DecisionTreeClassifier(criterion='gini', max_depth=150, min_samples_leaf=10, min_samples_split=10).fit(datos_train_normalizado, target_train)

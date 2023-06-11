@@ -11,14 +11,15 @@ from xgboost import XGBRegressor
 from sklearn.ensemble import RandomForestRegressor
 from lightgbm import LGBMRegressor
 
-app = Flask(__name__, static_url_path='/static')
+app = Flask(__name__, static_url_path='/modelo')
 CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
 @app.route('/prediction', methods=['POST'])
-def hello_world():
+# def hello_world():
+def prediccion():
     try:
         models = request.json
-        data = pd.read_csv(os.path.join(app.static_folder, "dataset_curado_2.csv"))
+        data = pd.read_csv(os.path.join("/static", "dataset_curado_2.csv"))
         X = data.drop('empleado', axis=1)
         y = data['empleado']
 
@@ -27,12 +28,18 @@ def hello_world():
         scaler = StandardScaler()
         X_train_scaled = scaler.fit_transform(X_train)
         X_val_scaled = scaler.transform(X_val)
+        out =''
         
         if models["blend"]:
             preds = np.array([0] * 291)
 
             if models["rf"] > 0:
-                rf = pickle.load(open(os.path.join(app.static_folder, "rf.sav"), 'rb'))
+                rf = pickle.load(open(os.path.join("modelo/rf/", "modelo_entrenado_rf.sav"), 'rb'))
+                #rf.fit(X_train_scaled, y_train)
+                preds = np.add(preds, np.array(list(rf.predict(X_val_scaled) * models["rf"])))
+
+            if models["dt"] > 0:
+                rf = pickle.load(open(os.path.join("modelo/dt/", "modelo_entrenado_dt.sav"), 'rb'))
                 #rf.fit(X_train_scaled, y_train)
                 preds = np.add(preds, np.array(list(rf.predict(X_val_scaled) * models["rf"])))
 
@@ -48,11 +55,18 @@ def hello_world():
 
             mse = mean_squared_error(y_val, preds) ** 0.5
 
+            print(" EL MODELO YA PREDIJO, Su resultado es: ", preds)
+            out = str(mse)
             return str(mse)
 
         else:
             if models["rf"] == 1.0:
-                rf = pickle.load(open(os.path.join(app.static_folder, "rf.sav"), 'rb'))
+                rf = pickle.load(open(os.path.join("modelo/rf/", "modelo_entrenado_rf.sav"), 'rb'))
+                #rf.fit(X_train_scaled, y_train)
+                preds = rf.predict(X_val_scaled)
+
+            if models["dt"] == 1.0:
+                rf = pickle.load(open(os.path.join("modelo/dt/", "modelo_entrenado_dt.sav"), 'rb'))
                 #rf.fit(X_train_scaled, y_train)
                 preds = rf.predict(X_val_scaled)
 
@@ -67,16 +81,18 @@ def hello_world():
                 preds = lgbm.predict(X_val_scaled)
 
             mse = mean_squared_error(y_val, preds) ** 0.5
-
+            print(" EL MODELO YA PREDIJO, Su resultado es: ", preds)
+            out = str(mse)
             return str(mse)
     except:
         pass
 
-    return "0"
+    return out
 
 
 @app.route('/train', methods=['POST'])
-def hello_world1():
+# def hello_world1():
+def entrenamiento():
     try:
         models = request.json
         data = pd.read_csv(os.path.join(app.static_folder, "dataset_curado_2.csv"))
