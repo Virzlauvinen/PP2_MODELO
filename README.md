@@ -19,7 +19,8 @@ ABRIR UNA TERMINAL COMMAND PROMPT
 2 - Correr el requirements.txt ----> pip install -r requirements.txt
  
 
-3 - parado sobre la carpeta flaskapp ejecutar el servidor flask con  -----> flask run 
+3 - En el dirctorio flaskapp, ejecutar el servidor flask con  -----> flask run 
 
-6 - Ejecutar el servidor de React ---> npm start
+
+4 - En el directorio reactapp ejecutar el servidor de React ---> npm start
 
