@@ -13,6 +13,8 @@ from modelo_best_param import busqueda_best_parametros_grilla
 from modelo_best_param import armar_parametros
 # from sklearn.model_selection import GridSearchCV
 import os
+import pickle
+import datetime
 
 
 def ver_directorio_actual():
@@ -184,7 +186,31 @@ decision_tree = tree.DecisionTreeClassifier(criterion=criterion, max_depth=max_d
 
 # Entrena el modelo con los parametros definidos por el csv de best param
 
-print("############### PROCESO DE ENTRENAMIENTO FINALIZADO #########################")
+print("############### PROCESO DE ENTRENAMIENTO FINALIZADO #########################",'\n', "COMIENZA EL GUARDADO DEL MODELO")
 
-# Entrenamos (con los datos del TRAIN) los modelos con las metricas obtenidas de la grilla
-# decision_tree = tree.DecisionTreeClassifier(criterion='gini', max_depth=150, min_samples_leaf=10, min_samples_split=10).fit(datos_train_normalizado, target_train)
+
+# Obtener fecha y hora actual
+fecha_actual = datetime.datetime.now()
+fecha_str = fecha_actual.strftime("%Y-%m-%d_%H-%M")
+
+# Directorio para guardar el modelo
+directorio = 'flaskapp/modelo/rf/'
+os.makedirs(directorio, exist_ok=True)  # Crea el directorio si no existe
+
+# Ruta y nombre de archivo
+filename = directorio + 'modelo_entrenado_rf_' + fecha_str + '.sav'
+
+# Guardar modelo
+pickle.dump(random_forest, open(filename, 'wb'))
+print("Se guardo el archivo: ", 'random_forest', filename)
+
+# Directorio para guardar el modelo
+directorio = 'flaskapp/modelo/dt/'
+os.makedirs(directorio, exist_ok=True)  # Crea el directorio si no existe
+
+# Ruta y nombre de archivo
+filename = directorio + 'modelo_entrenado_dt_' + fecha_str + '.sav'
+
+# Guardar modelo
+pickle.dump(decision_tree, open(filename, 'wb'))
+print("Se guardo el archivo: ", 'decision_tree',filename)
