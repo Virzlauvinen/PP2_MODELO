@@ -18,8 +18,9 @@ Para esto se seleccionaron los mejores modelos de la etapa anterior, Decision Tr
  
  3 - Correr el requirements.txt ----> pip install -r requirements.txt
  
- 4 - Agregar los CORS en el archivo app.py con el host de donde va a recibir la solicitud.
- esto se debe hacer para que el servidor de Flask acepte las peticiones del servidor de React.
+ 4 - Agregar los CORS en el archivo app.py con el host de donde va a recibir la solicitud. 
+ 
+ Esto se debe hacer para que el servidor de Flask acepte las peticiones del servidor de React.
 
 from flask import Flask, jsonify
 from flask_cors import CORS
