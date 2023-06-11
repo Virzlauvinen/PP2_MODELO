@@ -22,7 +22,7 @@ const Header = ({ training, setTraining }) => {
           }}
           className="mb-0"
         >
-          HOUSING PRICES
+          ECONOMIA LABORAL
         </p>
         <div className="d-flex align-items-center">
           <p

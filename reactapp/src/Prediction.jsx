@@ -8,7 +8,8 @@ import CircularProgress from "@mui/material/CircularProgress";
 const Prediction = ({ series, setSeries }) => {
   const [line, setLine] = useState(true);
   const [modelMode, setModelMode] = useState(true);
-  const [model, setModel] = useState("rf");
+  const [model, setModel] = useState([]);
+  const [dt, setDt] = useState("dt");
   const [rf, setRF] = useState(0.4);
   const [xgb, setXGB] = useState(0.6);
   const [lgbm, setLGBM] = useState(0.0);
@@ -97,6 +98,7 @@ const Prediction = ({ series, setSeries }) => {
       setLoading(true);
       const body = {
         rf: modelMode ? (model === "rf" ? 1.0 : 0.0) : rf,
+        dt: modelMode ? (model === "dt" ? 1.0 : 0.0) : dt,
         xgb: modelMode ? (model === "xgb" ? 1.0 : 0.0) : xgb,
         lgbm: modelMode ? (model === "lgbm" ? 1.0 : 0.0) : lgbm,
         blend: !modelMode,
@@ -116,6 +118,8 @@ const Prediction = ({ series, setSeries }) => {
                   ? "Random Forest"
                   : model === "xgb"
                   ? "XGBoost"
+                  : model === "dt"
+                  ? "DT"
                   : "LightGBM"
                 : `${rf}*RF + ${xgb}*XGB + ${lgbm}*LGBM`) +
               `-${series[0].data.length}`,
@@ -290,6 +294,20 @@ const Prediction = ({ series, setSeries }) => {
                       <p
                         className={"mb-0 p-1 text-center w-50"}
                         onClick={() => {
+                          setModel("dt");
+                        }}
+                        style={{
+                          color: model === "dt" ? "white" : "black",
+                          backgroundColor:
+                            model === "dt" ? "#7B6FF0" : "#EDF4F6",
+                        }}
+                      >
+                        Desicion Tree
+                      </p>
+{/*                       
+                      <p
+                        className={"mb-0 p-1 text-center w-50"}
+                        onClick={() => {
                           setModel("xgb");
                         }}
                         style={{
@@ -312,7 +330,7 @@ const Prediction = ({ series, setSeries }) => {
                         }}
                       >
                         LightGBM
-                      </p>
+                      </p> */}
                     </div>
                   </div>
 

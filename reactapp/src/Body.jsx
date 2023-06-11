@@ -106,7 +106,7 @@ const Training = ({ series, setSeries }) => {
         console.log("RMSE error: ", res.data);
         const newData = {
           x:
-            (model === "rf" ? "RF" : model === "xgb" ? "XGB" : "LightGBM") +
+            (model === "rf" ? "RF" : model === "xgb" ? "XGB" : model === "dt" ? "DT" : "nose") +
             `-${series[0].data.length}`,
           y: Math.round(res.data),
           description: {
@@ -232,6 +232,19 @@ const Training = ({ series, setSeries }) => {
                   </p>
                   <p
                     className={"mb-0 p-1 text-center w-50"}
+                      onClick={() => {
+                        setModel("dt");
+                      }}
+                      style={{
+                        color: model === "dt" ? "white" : "black",
+                        backgroundColor:
+                          model === "dt" ? "#7B6FF0" : "#EDF4F6",
+                      }}
+                    >
+                      Desicion Tree
+                    </p>
+                  {/* <p
+                    className={"mb-0 p-1 text-center w-50"}
                     onClick={() => {
                       setModel("xgb");
                     }}
@@ -253,7 +266,7 @@ const Training = ({ series, setSeries }) => {
                     }}
                   >
                     LightGBM
-                  </p>
+                  </p> */}
                 </div>
               </div>
 
@@ -309,7 +322,7 @@ const Training = ({ series, setSeries }) => {
                 />
               </div>
 
-              {model !== "rf" && (
+              {model !== "rf" && model !== "dt" && (
                 <div className="d-flex justify-content-between align-items-center my-4">
                   <p
                     className="mb-0"
