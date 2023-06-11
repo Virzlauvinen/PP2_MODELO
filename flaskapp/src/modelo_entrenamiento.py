@@ -198,7 +198,8 @@ directorio = 'flaskapp/modelo/rf/'
 os.makedirs(directorio, exist_ok=True)  # Crea el directorio si no existe
 
 # Ruta y nombre de archivo
-filename = directorio + 'modelo_entrenado_rf_' + fecha_str + '.sav'
+#filename = directorio + 'modelo_entrenado_rf_' + fecha_str + '.sav'
+filename = directorio + 'modelo_entrenado_rf_.sav'
 
 # Guardar modelo
 pickle.dump(random_forest, open(filename, 'wb'))
@@ -209,7 +210,8 @@ directorio = 'flaskapp/modelo/dt/'
 os.makedirs(directorio, exist_ok=True)  # Crea el directorio si no existe
 
 # Ruta y nombre de archivo
-filename = directorio + 'modelo_entrenado_dt_' + fecha_str + '.sav'
+#filename = directorio + 'modelo_entrenado_dt_' + fecha_str + '.sav'
+filename = directorio + 'modelo_entrenado_dt_.sav'
 
 # Guardar modelo
 pickle.dump(decision_tree, open(filename, 'wb'))
