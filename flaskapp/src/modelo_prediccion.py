@@ -14,13 +14,13 @@ import pandas as pd
 # from sklearn.ensemble import RandomForestClassifier
 # from sklearn.model_selection import train_test_split
 # from sklearn.model_selection import GridSearchCV
-from modelo_entrenamiento import random_forest
-from modelo_entrenamiento import decision_tree
+from src.modelo_entrenamiento import random_forest
+from src.modelo_entrenamiento import decision_tree
 
 """#OBTENCIÓN DEL DATA SET"""
 print("#################################   COMIENZA LA PREDICCION ############################################")
 # Lee el csv y lo convierte a un df de pandas
-path = "flaskapp/data/datos_test_prediccion.csv"
+path = "data/datos_test_prediccion.csv"
 dataset_crudo = pd.read_csv(path)
 # dataset_crudo
 

@@ -9,8 +9,8 @@ from sklearn import tree
 # from sklearn.metrics import accuracy_score
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
-from modelo_best_param import busqueda_best_parametros_grilla
-from modelo_best_param import armar_parametros
+from src.modelo_best_param import busqueda_best_parametros_grilla
+from src.modelo_best_param import armar_parametros
 # from sklearn.model_selection import GridSearchCV
 import os
 import pickle 
@@ -29,7 +29,7 @@ def ver_directorio_actual():
 # Lee el csv y lo convierte a un df de pandas
 # path = "/data/train.csv"
 ver_directorio_actual()
-path = "flaskapp/data/train.csv"
+path = "data/train.csv"
 dataset_crudo = pd.read_csv(path)
 dataset_crudo
 
@@ -134,7 +134,7 @@ dataset_curado = dataset_crudo
 
 # Guarda el DF CURADO en un archivo csv
 # ver_directorio_actual()
-dataset_curado.to_csv('flaskapp/static/dataset_curado_1.csv', index=False)
+dataset_curado.to_csv('static/dataset_curado_1.csv', index=False)
 
 # get_dummies convierte la variable categórica en variables ficticias/indicadoras (por cada categoria agrega una columna).
 dataset_curado_2 = pd.get_dummies(dataset_curado, columns=['padres_reside'])
@@ -147,7 +147,7 @@ dataset_curado_2.info()
 
 # Guarda el DF CURADO en un archivo csv
 # print('Estoy en el siguiente directorio: ', ver_directorio_actual())
-dataset_curado_2.to_csv('flaskapp/static/dataset_curado_2.csv', index=False)
+dataset_curado_2.to_csv('static/dataset_curado_2.csv', index=False)
 
 """# **MODELO: ARBOL DE DESICIÓN (DT)**"""
 
@@ -164,13 +164,13 @@ datos_train_normalizado = min_max_scaler.fit_transform(datos_train)
 datos_test_normalizado = min_max_scaler.fit_transform(datos_test)
 
 # print(datos_test)
-datos_test.to_csv('flaskapp/data/datos_test_prediccion.csv', index=False)
+datos_test.to_csv('data/datos_test_prediccion.csv', index=False)
 
 # Crea CSV con parametros
 # busqueda_best_parametros_grilla(datos_train_normalizado, target_train)
 
 # leo csv con best parametros para  HACER TEST UNITARIO
-best_param_load = pd.read_csv('flaskapp/data/df_param.csv')
+best_param_load = pd.read_csv('data/df_param.csv')
 
 # obtengo los parametros y los guardo en las variables
 criterion, max_depth, min_samples_leaf, min_samples_split, n_estimators = armar_parametros(best_param_load['best_params'][0])
