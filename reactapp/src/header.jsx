@@ -25,7 +25,7 @@ const Header = ({ training, setTraining }) => {
           ECONOMIA LABORAL
         </p>
         <div className="d-flex align-items-center">
-          <p
+          {/* <p
             className="mb-0"
             style={{
               margin: "0px 20px",
@@ -38,7 +38,7 @@ const Header = ({ training, setTraining }) => {
             onClick={() => setTraining(true)}
           >
             Model Training
-          </p>
+          </p> */}
           <p
             className="mb-0"
             style={{

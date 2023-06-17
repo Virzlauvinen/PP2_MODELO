@@ -38,11 +38,12 @@ function App() {
   return (
     <div className="App">
       <Header training={training} setTraining={setTraining} />
-      {training ? (
+      {/* {training ? (
         <Training series={trainseries} setSeries={setTrainSeries} />
       ) : (
         <Prediction series={predseries} setSeries={setPredSeries} />
-      )}
+      )} */}
+      <Prediction series={predseries} setSeries={setPredSeries} />
       <Footer />
       <ToastContainer autoClose={2000} theme="colored" pauseOnHover />
     </div>

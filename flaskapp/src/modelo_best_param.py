@@ -8,7 +8,7 @@ import ast
 # Generamos los parametros para hacer una busqueda en grilla del mejor modelo
 def busqueda_best_parametros_grilla(datos_train_normalizado, target_train) :
     ''' La funcion busca los mejores parametros para modelo RandomForestClassifier() y tree.DecisionTreeClassifier
-        Como parametros de entrada deben ingresar: 1 -> set de datos predictores train;  2 -> Set de datos target train.
+        Como parametros de entrada deben ingresar: 1 -> set de datos predictores train;  2 -> Set de datos target tain.
         Devuelve un archivo csv donde la los parametros se encontraran en ['best_params'][0] -> RandomForestClassifier y ['best_params'][1] -> DecisionTreeClassifier
     '''
     model_params = {
@@ -51,7 +51,7 @@ def busqueda_best_parametros_grilla(datos_train_normalizado, target_train) :
 
     print(df_score['best_params'][0])
     print(df_score['best_params'][1])
-    # Guardo df con bestparametros en la carpeta data
+    # Guardo df con besparametros en la carpeta data
     df_score.to_csv('data/df_param.csv', index=False)
 
 def armar_parametros(cadena) :

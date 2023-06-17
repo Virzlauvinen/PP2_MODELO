@@ -4,12 +4,14 @@ import Slider from "@mui/material/Slider";
 import { toast } from "react-toastify";
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
+import FileUploadComponent from "./CargarArchivo"; 
+import FileDownloadComponent from "./DescargarArchivo";
 
 const Prediction = ({ series, setSeries }) => {
   const [line, setLine] = useState(true);
   const [modelMode, setModelMode] = useState(true);
   const [model, setModel] = useState([]);
-  const [dt, setDt] = useState("dt");
+  const [dt, setDt] = useState(1);
   const [rf, setRF] = useState(0.4);
   const [xgb, setXGB] = useState(0.6);
   const [lgbm, setLGBM] = useState(0.0);
@@ -146,19 +148,23 @@ const Prediction = ({ series, setSeries }) => {
   };
 
   return (
+    
     <div
       style={{
         display: "flex",
         height: "80vh",
         alignItems: "center",
-      }}
-    >
+      }}>
       <div
         className="d-flex justify-content-between mx-auto"
         style={{
           width: "90%",
         }}
-      >
+        >
+          
+        <div className="row">
+            <FileUploadComponent>CARGAR ARCHIVO</FileUploadComponent>
+          </div>
         <div className="w-50 d-flex flex-column align-items-center">
           <div
             className="d-flex justify-content-center align-items-center rounded my-2 p-1"
@@ -168,7 +174,7 @@ const Prediction = ({ series, setSeries }) => {
               width: "200px",
               cursor: "pointer",
             }}
-          >
+            >
             <p
               className={"mb-0 rounded px-1 text-center w-50"}
               onClick={() => {
@@ -443,6 +449,7 @@ const Prediction = ({ series, setSeries }) => {
                   </button>
                 )}
               </div>
+                <FileDownloadComponent fileName="prediccion_2023-06-17_17-32-57.csv" >DESCARGAR PREDICCION </FileDownloadComponent>
             </div>
           </div>
         </div>

@@ -25,17 +25,18 @@ def leer_csv_prediccion(url):
     1 - Va a buscar el archivo en la ruta.
     2 - Va aplicar un cleaning a la planilla
     3 - Escala los datos.
-    Devuelve un df listo para predecir.'''
+    Devuelve un df listo para predecir, y los headers'''
     path = str(url)
     print(path, os.getcwd())
     dataset_crudo = pd.read_csv(path)
     dataset_normalizado = data_cleaning(dataset_crudo)
+    headres = dataset_normalizado.columns
     # Normalizamos el dataset
     min_max_scaler = preprocessing.MinMaxScaler()
     dataset_normalizado2 = min_max_scaler.fit_transform(dataset_normalizado)
-    return dataset_normalizado2
+    return dataset_normalizado2, headres
 
-def levantar_modelo_guardado(models,dataset_normalizado):
+def levantar_modelo_guardado(models,dataset_normalizado, headers):
     ''' Recibe como parametro MODEL que puede ser rf o dt
         y un DF normalizado para la prediccion
         1 - identifica que modelo se quiere usar.
@@ -43,23 +44,38 @@ def levantar_modelo_guardado(models,dataset_normalizado):
         3 - Predice los datos pasados en dataset_normalizado.
         4 - Se crea una columna prediccion en dataset_normalizado con la prediccion.'''
     dataset_normalizado2 = dataset_normalizado
-    print(models["rf"] ,"rf - dt" ,models["dt"] )
-    preds
+    headers = headers
+    directorio_actual = os.getcwd()
+    print( directorio_actual ,"rf - dt" ,models["dt"] )
+    
+    # DECLARO PREDS
+    preds = np.array([0] * len(dataset_normalizado2))
 
     if models["rf"] > 0:
         print("#################### ENTRA EN IF RF #########################")
-        rf = pickle.load(open(os.path.join("modelo/rf/", "modelo_entrenado_rf.sav"), 'rb'))
+        rf = pickle.load(open(os.path.join("modelo/rf/modelo_entrenado_rf_.sav"), 'rb'))
         #rf.fit(X_train_scaled, y_train)
-        preds = np.add(preds, np.array(list(rf.predict(dataset_normalizado2) * models["rf"])))
-        print(preds)
+        # preds = np.add(preds, np.array(list(rf.predict(dataset_normalizado2) * models["rf"])))
+        preds = np.add(preds, np.array(list(rf.predict(dataset_normalizado2))))
+        print(type(preds))
 
     if models["dt"] > 0:
-        dt = pickle.load(open(os.path.join("modelo/dt/", "modelo_entrenado_dt.sav"), 'rb'))
+        dt = pickle.load(open(os.path.join("modelo/dt/modelo_entrenado_dt_.sav"), 'rb'))
         #rf.fit(X_train_scaled, y_train)
-        preds = np.add(preds, np.array(list(dt.predict(dataset_normalizado2) * models["dt"])))
+        # preds = np.add(preds, np.array(list(dt.predict(dataset_normalizado2) * models["dt"])))
+        preds = np.add(preds, np.array(list(dt.predict(dataset_normalizado2))))
     
-    dataset_normalizado2.insert(-1, 'prediccion', preds)
-    return dataset_normalizado2
+    # Convertir el array en un DataFrame
+    df = pd.DataFrame(dataset_normalizado)
+    df.columns = headers
+    print(df.columns)
+
+
+    # Crear una columna con los valores de preds
+    # preds = np.array([0] * len(df))  # Ejemplo de valores de preds
+    df['prediccion'] = preds
+    # dataset_normalizado2.insert(-1, 'prediccion', preds)
+    return df
 
 
 
