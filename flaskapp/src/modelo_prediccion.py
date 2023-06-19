@@ -34,7 +34,11 @@ def leer_csv_prediccion(url):
     # Normalizamos el dataset
     min_max_scaler = preprocessing.MinMaxScaler()
     dataset_normalizado2 = min_max_scaler.fit_transform(dataset_normalizado)
+     # Convertir el array en un DataFrame
+    df = pd.DataFrame(dataset_normalizado)
+    df.to_csv('data/datos_test_normalizado2.csv', index=False)
     return dataset_normalizado2, headres
+ 
 
 def levantar_modelo_guardado(models,dataset_normalizado, headers):
     ''' Recibe como parametro MODEL que puede ser rf o dt

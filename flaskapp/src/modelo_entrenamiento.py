@@ -159,6 +159,7 @@ def split_scaler_fit_modelo(dataset_curado_KDD):
 
     # print(datos_test)
     datos_test.to_csv('data/datos_test_prediccion.csv', index=False)
+   
 
     # Crea CSV con parametros
     # busqueda_best_parametros_grilla(datos_train_normalizado, target_train)
@@ -198,7 +199,7 @@ def guardar_modelo(random_forest,decision_tree):
 
     # Ruta y nombre de archivo
     # filename = directorio + 'modelo_entrenado_rf_' + fecha_str + '.sav'
-    filename = directorio + 'modelo_entrenado_rf.plk'
+    filename = directorio + 'modelo_entrenado_rf.sav'
 
     # Guardar modelo
     pickle.dump(random_forest, open(filename, 'wb'))
@@ -210,7 +211,7 @@ def guardar_modelo(random_forest,decision_tree):
 
     # Ruta y nombre de archivo
     # filename = directorio + 'modelo_entrenado_dt_' + fecha_str + '.sav'
-    filename = directorio + 'modelo_entrenado_dt.plk'
+    filename = directorio + 'modelo_entrenado_dt.sav'
 
     # Guardar modelo
     pickle.dump(decision_tree, open(filename, 'wb'))
