@@ -33,6 +33,10 @@ EN UNA TERMINAL COMMAND PROMPT
 - Una vez dentro del directorio del proyecto, ejecuta el siguiente comando para iniciar el servidor de desarrollo React: **npm start**
 - (para apagar ctrl+c)
 
+Después de ejecutar npm start, el servidor de desarrollo compilará tu aplicación y la iniciará. También mostrará un mensaje indicando la URL donde puedes ver la aplicación en tu navegador, generalmente http://localhost:3000. Abre tu navegador  e ingresa la URL proporcionada.
+
+La aplicación ahora se ejecutará en tu navegador. Cualquier cambio que realices en el código fuente provocará automáticamente una recarga de la página, lo que te permitirá ver la versión actualizada de tu aplicación.
+
 
 **DIFICULTADES**
 
@@ -50,7 +54,7 @@ CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 DIFICULTADES SIN RESOLVER TODAVIA:
 
 El botón de descarga no funciona todavia.
-
+cuales son las unicas carpetas necesarias que tienen que ir al main para un posterior deployment
 
 
 
