@@ -14,13 +14,13 @@ Para esto se seleccionaron los mejores modelos de la etapa anterior, Decision Tr
 
 1 - Instalar Python 3.7 
  
-ABRIR UNA TERMINAL COMMAND PROMPT 
+EN UNA TERMINAL COMMAND PROMPT 
 
 2 - Correr el requirements.txt ----> pip install -r requirements.txt
  
 
-3 - En el dirctorio flaskapp, ejecutar el servidor flask con  -----> flask run 
+3 - En el dirctorio flaskapp (cd flaskapp) ejecutar el servidor flask -----> flask run  (para apagar ctrl+c)
 
 
-4 - En el directorio reactapp ejecutar el servidor de React ---> npm start
+4 - En el directorio reactapp (cd reactapp) ejecutar el servidor de React ---> npm start  (para apagar ctrl+c)
 
