@@ -16,6 +16,7 @@ from src.modelo_entrenamiento import *
 from src.modelo_prediccion import leer_csv_prediccion, levantar_modelo_guardado 
 import datetime
 from werkzeug.utils import secure_filename
+import logging
 
 # app = Flask(__name__, static_url_path='/modelo')
 app = Flask(__name__)
@@ -42,7 +43,7 @@ def hello_world():
             fecha_actual = datetime.datetime.now()
             fecha_str = fecha_actual.strftime("%Y-%m-%d_%H-%M-%S")
             resulado_prediccion.to_csv('datos_salida/prediccion_'+fecha_str+'.csv', sep=';' )
-            nombre_archivo = 'datos_salida/prediccion_'+fecha_str+'.csv'
+            nombre_archivo = 'prediccion_'+fecha_str+'.csv'
             return nombre_archivo
  
             # preds = np.array([0] * 291)
@@ -73,7 +74,7 @@ def hello_world():
                 fecha_actual = datetime.datetime.now()
                 fecha_str = fecha_actual.strftime("%Y-%m-%d_%H-%M-%S")
                 resulado_prediccion.to_csv('datos_salida/prediccion_'+fecha_str+'.csv', sep=';' )   
-                nombre_archivo = 'datos_salida/prediccion_'+fecha_str+'.csv'
+                nombre_archivo = 'prediccion_'+fecha_str+'.csv'
                 # rf = pickle.load(open(os.path.join("modelo/rf/", "modelo_entrenado_rf.sav"), 'rb'))
                 # #rf.fit(X_train_scaled, y_train)
                 # preds = rf.predict(X_val_scaled)
@@ -82,7 +83,7 @@ def hello_world():
                 resulado_prediccion = levantar_modelo_guardado(models, ds_normalizado, headers)
                 fecha_actual = datetime.datetime.now()
                 fecha_str = fecha_actual.strftime("%Y-%m-%d_%H-%M-%S")
-                nombre_archivo = 'datos_salida/prediccion_'+fecha_str+'.csv'
+                nombre_archivo = 'prediccion_'+fecha_str+'.csv'
                 resulado_prediccion.to_csv(nombre_archivo, sep=';' )  
                 # rf = pickle.load(open(os.path.join("modelo/dt/", "modelo_entrenado_dt.sav"), 'rb'))
                 # #rf.fit(X_train_scaled, y_train)
@@ -166,14 +167,15 @@ def upload_file():
     return 'Extensión de archivo no permitida', 400
 
 # Endpoint para descargar un archivo
-@app.route('/download', methods=['GET'])
-def download_file():
-    filename = request.args.get('fileName')
+@app.route('/download/<filename>', methods=['GET'])
+def download(filename):
+    """Download a file."""
+    logging.info('Downloading file= [%s]', filename)
+    logging.info(app.root_path)
+    full_path = os.path.join(app.root_path, app.config['DOWNLOAD_FOLDER'])
+    logging.info(full_path)
+    return send_from_directory(full_path, filename, as_attachment=True)
 
-    if not filename:
-        return 'Nombre de archivo no proporcionado', 400
-
-    return send_from_directory(app.config['DOWNLOAD_FOLDER'], filename, as_attachment=True)
 
 
         

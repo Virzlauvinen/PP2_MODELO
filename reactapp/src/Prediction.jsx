@@ -16,7 +16,7 @@ const Prediction = ({ series, setSeries }) => {
   const [xgb, setXGB] = useState(0.6);
   const [lgbm, setLGBM] = useState(0.0);
   const [loading, setLoading] = useState(false);
-
+  const [fileName, setFileName] = useState([]);
   const options = {
     chart: {
       id: "prediction_errors",
@@ -135,6 +135,7 @@ const Prediction = ({ series, setSeries }) => {
               data: data,
             },
           ]);
+          setFileName(res.data);
           setLoading(false);
         })
         .catch((err) => {
@@ -449,7 +450,7 @@ const Prediction = ({ series, setSeries }) => {
                   </button>
                 )}
               </div>
-                <FileDownloadComponent fileName="prediccion_2023-06-17_17-32-57.csv" >DESCARGAR PREDICCION </FileDownloadComponent>
+                <FileDownloadComponent fileName={fileName} >DESCARGAR PREDICCION </FileDownloadComponent>
             </div>
           </div>
         </div>

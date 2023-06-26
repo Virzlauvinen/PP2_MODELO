@@ -4,7 +4,7 @@ import axios from 'axios';
 const FileDownloadComponent = ({ fileName }) => {
   const handleFileDownload = async () => {
     try {
-      const respuesta = await axios.get('http://localhost:5000/download', {
+      const respuesta = await axios.get(`http://localhost:5000/download/${fileName}`, {
         responseType: 'blob',
       });
 
