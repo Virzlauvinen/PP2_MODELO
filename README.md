@@ -19,11 +19,22 @@ EN UNA TERMINAL COMMAND PROMPT
 2 - Correr el requirements.txt ----> pip install -r requirements.txt
  
 
-3 - En el dirctorio flaskapp (cd flaskapp) ejecutar el servidor flask -----> flask run  (para apagar ctrl+c)
+3 - Ejecutar Flaskapp 
+- Abre tu terminal o línea de comandos.
+- Navega hasta el directorio raíz de tu proyecto de aplicación usando el comando cd reactapp
+- En el dirctorio flaskapp ejecutar el servidor flask con **flask run**
+- (para apagar ctrl+c)
 
 
-4 - En el directorio reactapp (cd reactapp) ejecutar el servidor de React ---> npm start  (para apagar ctrl+c)
+4 - Ejecutar Reactapp la aplicación en modo de desarrollo: Esto asume que tienes Node.js y npm (Node Package Manager) instalados en tu máquina. Si no los has instalado, debes hacerlo antes de ejecutar el comando anterior.
 
+- Abre tu terminal o línea de comandos.
+- Navega hasta el directorio raíz de tu proyecto de aplicación usando el comando cd reactapp
+- Una vez dentro del directorio del proyecto, ejecuta el siguiente comando para iniciar el servidor de desarrollo React: **npm start**
+- (para apagar ctrl+c)
+
+
+**DIFICULTADES**
 
 EN EL CASO DE PROLEMAS DE CONEXION
 
@@ -36,7 +47,11 @@ from flask_cors import CORS
 app = Flask(_name_)
 CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
+DIFICULTADES SIN RESOLVER TODAVIA:
 
-**DIFICULTADES**
+El botón de descarga no funciona todavia.
+
+
+
 
 
