@@ -1,7 +1,7 @@
 # PRACTICA PROFESIONALIZANTE 2 (PP2) -  CLASIFICACIÓN DE LA ECONOMÍA LABORAL
 
 
-INTEGRANTE: Virginia Zlauvinen
+**INTEGRANTE:** Virginia Zlauvinen
 
 
 El objetivo del presente trabajo es hacer la puesta en producción y el posterior deployment del proyecto de practica profesionalizante 1 (PPT1_CLASIFICACIÓN DE LA ECONOMÍA LABORAL) en el cual se crearon diferentes algoritmos de clasificación que lograban categorizar a un grupo de individuos en empleado o desempleado. 
@@ -23,4 +23,20 @@ EN UNA TERMINAL COMMAND PROMPT
 
 
 4 - En el directorio reactapp (cd reactapp) ejecutar el servidor de React ---> npm start  (para apagar ctrl+c)
+
+
+EN EL CASO DE PROLEMAS DE CONEXION
+
+ Agregar los CORS en el archivo app.py con el host de donde va a recibir la solicitud.
+ esto se debe hacer para que el servidor de Flask acepte las peticiones del servidor de React.
+
+from flask import Flask, jsonify
+from flask_cors import CORS
+
+app = Flask(_name_)
+CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+
+
+**DIFICULTADES**
+
 
