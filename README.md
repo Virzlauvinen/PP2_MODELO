@@ -38,8 +38,6 @@ Después de ejecutar npm start, el servidor de desarrollo compilará tu aplicaci
 La aplicación ahora se ejecutará en tu navegador. Cualquier cambio que realices en el código fuente provocará automáticamente una recarga de la página, lo que te permitirá ver la versión actualizada de tu aplicación.
 
 
-**DIFICULTADES**
-
 EN EL CASO DE PROLEMAS DE CONEXION
 
  Agregar los CORS en el archivo app.py con el host de donde va a recibir la solicitud.
