@@ -52,7 +52,7 @@ app = Flask(_name_)
 CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
 
-#Link a la presentacion en PTT del trabajo:
+# Link a la presentacion en PTT del trabajo:
 
 https://docs.google.com/presentation/d/1w-3SK9jgVscHs1dC-s4IbRUWt3_0MHknAAZ7SUmoViI/edit?usp=sharing
 
