@@ -13,7 +13,7 @@ import os
 from src.modelo_entrenamiento import split_scaler_fit_modelo
 # from src.modelo_entrenamiento import decision_tree
 
-# 1 - Levantar el modelo guardado en la carpeta data
+# 1 - Levantar el modelo guardado en la carpeta modelo
 # 2 - recibir y/o levantar archivo para realizar prediccion
 # 3 - Realizar prediccion.
 # 4 - Devolver df con prediccion. (GUARDAR)
