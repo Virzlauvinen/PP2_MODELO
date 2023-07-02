@@ -20,13 +20,13 @@ EN UNA TERMINAL COMMAND PROMPT
  
 
 3 - Ejecutar Flaskapp 
-- Abre tu terminal o línea de comandos.
-- Navega hasta el directorio raíz de tu proyecto de aplicación usando el comando cd reactapp
+- Abrí tu terminal o línea de comandos.
+- Navega hasta el directorio raíz de tu proyecto de aplicación usando el comando cd flaskapp
 - En el dirctorio flaskapp ejecutar el servidor flask con **flask run**
 - (para apagar ctrl+c)
 
 
-4 - Ejecutar Reactapp la aplicación en modo de desarrollo: Esto asume que tienes Node.js y npm (Node Package Manager) instalados en tu máquina. Si no los has instalado, debes hacerlo antes de ejecutar el comando anterior.
+4 - Ejecutar Reactapp la aplicación en modo de desarrollo: Esto asume que tenes Node.js y npm (Node Package Manager) instalados en tu máquina. Si no los has instalado, debes hacerlo antes de realizar lo siguiente:
 
 - Abre tu terminal o línea de comandos.
 - Navega hasta el directorio raíz de tu proyecto de aplicación usando el comando cd reactapp
@@ -50,8 +50,6 @@ from flask_cors import CORS
 
 app = Flask(_name_)
 CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
-
-DIFICULTADES SIN RESOLVER TODAVIA:
 
 El botón de descarga no funciona todavia.
 cuales son las unicas carpetas necesarias que tienen que ir al main para un posterior deployment
