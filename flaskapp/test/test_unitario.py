@@ -12,7 +12,7 @@ class TestLeerCSV(unittest.TestCase):
         return dataset_crudo
 
     def test_leer_csv(self):
-        ruta_archivo_csv = "flaskapp\datos_salida\prediccion_2023-06-26_13-38-06.csv"  # Coloca aquí la ruta de tu archivo CSV de prueba
+        ruta_archivo_csv = "flaskapp\datos_salida\prediccion_2023-07-02_19-12-12.csv"  # Coloca aquí la ruta de tu archivo CSV de prueba
         dataset = self.leer_csv(ruta_archivo_csv)
         # Verificar que el DataFrame tenga las columnas esperadas
         columnas_esperadas = ['id', 'sexo', 'edad', 'anos_edc', 'pareja', 'estudiante_act', 'estrato', 'pc', 'internet', 'etnia', 'padres_reside']
