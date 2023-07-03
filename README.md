@@ -38,8 +38,6 @@ Después de ejecutar npm start, el servidor de desarrollo compilará tu aplicaci
 La aplicación ahora se ejecutará en tu navegador. Cualquier cambio que realices en el código fuente provocará automáticamente una recarga de la página, lo que te permitirá ver la versión actualizada de tu aplicación.
 
 
-**DIFICULTADES**
-
 EN EL CASO DE PROLEMAS DE CONEXION
 
  Agregar los CORS en el archivo app.py con el host de donde va a recibir la solicitud.
@@ -51,8 +49,12 @@ from flask_cors import CORS
 app = Flask(_name_)
 CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
-El botón de descarga no funciona todavia.
-cuales son las unicas carpetas necesarias que tienen que ir al main para un posterior deployment
+
+# Link a la presentacion en PTT del trabajo:
+
+https://docs.google.com/presentation/d/1w-3SK9jgVscHs1dC-s4IbRUWt3_0MHknAAZ7SUmoViI/edit?usp=sharing
+
+
 
 
 
