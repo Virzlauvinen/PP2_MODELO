@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { toast } from "react-toastify";
 
 const FileUploadComponent = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -17,7 +18,12 @@ const FileUploadComponent = () => {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
-      });
+      }).then((res) => {
+        console.log("RESPUESTA DEL BACK: ", res.data);
+        toast.success(
+          "PROCESADO CORRECTAMENTE. "+ res.data);
+      
+    });
 
       // Limpiar el archivo seleccionado después de subirlo
       setSelectedFile(null);

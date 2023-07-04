@@ -4,13 +4,13 @@
 
 # Importo librerias
 import pandas as pd
-from src.modelo_entrenamiento import data_cleaning
+from src.modelo_entrenamiento import data_cleaning, ejecutar_todo
 from sklearn import preprocessing
 import pandas as pd
 import numpy as np
 import pickle
 import os
-from src.modelo_entrenamiento import split_scaler_fit_modelo
+# from src.modelo_entrenamiento import split_scaler_fit_modelo
 # from src.modelo_entrenamiento import decision_tree
 
 # 1 - Levantar el modelo guardado en la carpeta modelo
@@ -54,6 +54,7 @@ def levantar_modelo_guardado(models,dataset_normalizado, headers):
     
     # DECLARO PREDS
     preds = np.array([0] * len(dataset_normalizado2))
+    preds1 = np.array([0] * len(dataset_normalizado2))
 
     if models["rf"] > 0:
         print("#################### ENTRA EN IF RF #########################")
@@ -68,6 +69,15 @@ def levantar_modelo_guardado(models,dataset_normalizado, headers):
         #rf.fit(X_train_scaled, y_train)
         # preds = np.add(preds, np.array(list(dt.predict(dataset_normalizado2) * models["dt"])))
         preds = np.add(preds, np.array(list(dt.predict(dataset_normalizado2))))
+
+    if models["blend"] > 0:
+        dt = pickle.load(open(os.path.join("modelo/dt/modelo_entrenado_dt_.sav"), 'rb'))
+        rf = pickle.load(open(os.path.join("modelo/rf/modelo_entrenado_rf_.sav"), 'rb'))
+        #rf.fit(X_train_scaled, y_train)
+        # preds = np.add(preds, np.array(list(dt.predict(dataset_normalizado2) * models["dt"])))
+        preds = np.add(preds, np.array(list(dt.predict(dataset_normalizado2))))
+        preds1 = np.add(preds1, np.array(list(rf.predict(dataset_normalizado2))))
+    
     
     # Convertir el array en un DataFrame
     df = pd.DataFrame(dataset_normalizado)
@@ -77,10 +87,17 @@ def levantar_modelo_guardado(models,dataset_normalizado, headers):
 
     # Crear una columna con los valores de preds
     # preds = np.array([0] * len(df))  # Ejemplo de valores de preds
-    df['prediccion'] = preds
+    if models["blend"] > 0 :
+        df['prediccion_dt'] = preds
+        df['prediccion_rf'] = preds1
+    else:
+        df['prediccion'] = preds
     # dataset_normalizado2.insert(-1, 'prediccion', preds)
     return df
 
+def entrenamiento():
+    salida = ejecutar_todo()
+    return salida
 
 
 # """#OBTENCIÓN DEL DATA SET"""

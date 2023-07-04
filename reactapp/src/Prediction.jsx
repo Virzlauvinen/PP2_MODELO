@@ -110,9 +110,69 @@ const Prediction = ({ series, setSeries }) => {
           // "https://pratik-housing-prices-flask.herokuapp.com/prediction",
           "http://127.0.0.1:5000/prediction",
           body
+        ).then((res) => {
+          console.log("RMSE error: ", res.data);
+          toast.success("Se ha realizado la prediccion correctamente.\ndescargue el archivo" + res.data);
+          const newData = {
+            x:
+              (modelMode
+                ? model === "rf"
+                  ? "Random Forest"
+                  : model === "xgb"
+                  ? "XGBoost"
+                  : model === "dt"
+                  ? "DT"
+                  : "LightGBM"
+                : `${rf}*RF + ${xgb}*XGB + ${lgbm}*LGBM`) +
+              `-${series[0].data.length}`,
+            y: Math.round(res.data),
+          };
+          const data = series[0].data;
+          data.push(newData);
+          setSeries([
+            {
+              ...series[0],
+              data: data,
+            },
+          ]);
+          setFileName(res.data);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          toast.error(
+            "Sorry, Server crashed :(. To get better experience run in local."
+          );
+          setLoading(false);
+        });
+    }
+  };
+
+  const train = async () => {
+    if (!modelMode && rf + xgb + lgbm !== 1) {
+      toast.warning(
+        "Sum of all model values should be 1. Now it is " + (rf + xgb)
+      );
+    } else {
+      setLoading(true);
+      const body = {
+        rf: modelMode ? (model === "rf" ? 1.0 : 0.0) : rf,
+        dt: modelMode ? (model === "dt" ? 1.0 : 0.0) : dt,
+        xgb: modelMode ? (model === "xgb" ? 1.0 : 0.0) : xgb,
+        lgbm: modelMode ? (model === "lgbm" ? 1.0 : 0.0) : lgbm,
+        blend: !modelMode,
+      };
+      await axios
+        .post(
+          // "https://pratik-housing-prices-flask.herokuapp.com/prediction",
+          "http://127.0.0.1:5000/train",
+          body
         )
         .then((res) => {
-          console.log("RMSE error: ", res.data);
+          console.log("RESPUESTA DEL BACK: ", res.data);
+          toast.success(
+            "PROCESADO CORRECTAMENTE. "+ res.data
+          );
           const newData = {
             x:
               (modelMode
@@ -166,6 +226,7 @@ const Prediction = ({ series, setSeries }) => {
         <div className="row">
             <FileUploadComponent>CARGAR ARCHIVO</FileUploadComponent>
           </div>
+          
         <div className="w-50 d-flex flex-column align-items-center">
           <div
             className="d-flex justify-content-center align-items-center rounded my-2 p-1"
@@ -432,6 +493,25 @@ const Prediction = ({ series, setSeries }) => {
                   </p>
                 </>
               )}
+
+              {/* BOTON TRAIN */}
+              <div className="d-flex justify-content-center my-4">
+                {loading ? (
+                  <CircularProgress />
+                ) : (
+                  <button
+                    className="btn btn-lg"
+                    style={{
+                      backgroundColor: "#EDF4F6",
+                      borderColor: "#7B6FF0",
+                      width: "200px",
+                    }}
+                    onClick={train}
+                  >
+                    TRAIN
+                  </button>
+                )}
+              </div>
 
               <div className="d-flex justify-content-center my-4">
                 {loading ? (

@@ -10,6 +10,7 @@ from sklearn import tree
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from src.modelo_best_param import armar_parametros, busqueda_best_parametros_grilla
+# from modelo_best_param import armar_parametros, busqueda_best_parametros_grilla
 # from sklearn.model_selection import GridSearchCV
 import os
 import pickle 
@@ -189,6 +190,7 @@ def split_scaler_fit_modelo(dataset_curado_KDD):
 
 def guardar_modelo(random_forest,decision_tree):
     ''' RECIBE 2 MODELOS Y LOS GUARDA PARA LUEGO SER CONSUMIDOS'''    
+    out =""
     # Obtener fecha y hora actual
     fecha_actual = datetime.datetime.now()
     fecha_str = fecha_actual.strftime("%Y-%m-%d_%H-%M")
@@ -199,11 +201,12 @@ def guardar_modelo(random_forest,decision_tree):
 
     # Ruta y nombre de archivo
     # filename = directorio + 'modelo_entrenado_rf_' + fecha_str + '.sav'
-    filename = directorio + 'modelo_entrenado_rf.sav'
+    filename = directorio + 'modelo_entrenado_rf_.sav'
 
     # Guardar modelo
     pickle.dump(random_forest, open(filename, 'wb'))
     print("Se guardo el archivo: ", 'random_forest', filename)
+    out = "Se guardo el archivo: " + 'random_forest ' + filename
 
     # Directorio para guardar el modelo
     directorio = 'modelo/dt/'
@@ -211,11 +214,14 @@ def guardar_modelo(random_forest,decision_tree):
 
     # Ruta y nombre de archivo
     # filename = directorio + 'modelo_entrenado_dt_' + fecha_str + '.sav'
-    filename = directorio + 'modelo_entrenado_dt.sav'
+    filename = directorio + 'modelo_entrenado_dt_.sav'
 
     # Guardar modelo
     pickle.dump(decision_tree, open(filename, 'wb'))
-    print("Se guardo el archivo: ", 'decision_tree',filename )
+    print("Se guardo el archivo: ", 'decision_tree',filename)
+
+    out = out + "\nSe guardo el archivo: " + 'decision_tree ' + filename
+    return "ENTRENADO CORRECTAMENTE \n" + out 
 
 def leer_csv(ruta_archivo_csv):
     url = str(ruta_archivo_csv)
@@ -236,4 +242,6 @@ def ejecutar_todo():
     # 3 - CREA LOS MODELOS, LOS ENTRENA
     random_forest, decision_tree = split_scaler_fit_modelo(dataset_curado_KDD)
     # 4 - GUARDA LOS MODELOS
-    guardar_modelo(random_forest, decision_tree)
+    salida = guardar_modelo(random_forest, decision_tree)
+    return salida
+    

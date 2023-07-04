@@ -6,7 +6,7 @@ const FileDownloadComponent = ({ fileName }) => {
     try {
       const respuesta = await axios.get(`http://localhost:5000/download/${fileName}`, {
         responseType: 'blob',
-      });
+      })
 
       const urlArchivo = window.URL.createObjectURL(new Blob([respuesta.data]));
       const link = document.createElement('a');
@@ -15,6 +15,7 @@ const FileDownloadComponent = ({ fileName }) => {
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+      console.log()
     } catch (error) {
       console.error('Error al descargar el archivo:', error);
     }
